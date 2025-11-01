@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Learning Journey</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #58b2db 0%, #8155ad 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .learning-item {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-left: 6px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+        
+        .learning-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .learning-item h3 {
+            color: #333;
+            margin-top: 0;
+            font-size: 1.5em;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        
+        .date {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .description {
+            color: #555;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+        
+        .empty-message {
+            text-align: center;
+            color: white;
+            font-size: 1.2em;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'about_me' %}">About Me</a>
+        </div>
+        
+        <div class="header">
+            <h1>My Learning Journey</h1>
+            <p style="font-size: 1.2em;">Tracking my learning progress </p>
+        </div>
+        
+        {% for learning in learnings %}
+        <div class="learning-item">
+            <h3>{{ learning.title }}</h3>
+            <p class="description">{{ learning.description }}</p>
+        </div>
+        {% empty %}
+            <div class="empty-message">
+                No learning entries yet. Add some through admin!
+            </div>
+        {% endfor %}
+    </div>
+    <!-- PROJECT DOCUMENTATION SECTION -->
+<div style="margin-top: 80px; padding-top: 40px; border-top: 2px solid rgba(255,255,255,0.2);">
+    
+    <div class="header">
+        <h1>Project Documentation</h1>
+        <p style="font-size: 1.2em;">Admin Interface Screenshots</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 30px;">
+        
+        {% for doc in documentation %}
+        <div class="learning-item" style="text-align: center;">
+            <h3>{{ doc.title }}</h3>
+            <img src="{{ doc.image.url }}" alt="{{ doc.title }}" style="max-width: 100%; border-radius: 10px; border: 3px solid #f0f0f0; margin: 15px 0;">
+        </div>
+        {% empty %}
+        <div style="text-align: center; color: white; grid-column: 1 / -1;">
+            <p>No documentation added yet.</p>
+        </div>
+        {% endfor %}
+        
+    </div>
+</div>
+
+<!-- FOOTER SECTION -->
+<footer style="margin-top: 80px; padding: 30px 0; background: rgba(0, 0, 0, 0.3); text-align: center; color: white;">
+    <div class="container">
+        <p style="margin: 10px 0; color: rgba(255,255,255,0.8);">
+            Built with Django 
+        </p>
+        <p style="margin: 0; color: rgba(255,255,255,0.6);">
+            &copy; 2025 Gyelyum Dema • Samtse College of Education
+        </p>
+    </div>
+</footer>
+</body>
+</html>
